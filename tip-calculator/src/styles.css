@@ -1,0 +1,17 @@
+body {
+  font-family: sans-serif;
+  font-size: x-large;
+}
+
+.input {
+  font-size: x-large;
+}
+
+.amount {
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+button {
+  font-size: large;
+}
