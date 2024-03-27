@@ -1,0 +1,76 @@
+* {
+  /* box-sizing: border-box; */
+}
+
+.flashcards div {
+  max-height: min-content;
+  border: 1vh solid grey;
+  background-color: #e0dede;
+  border-radius: 2vh;
+  font-size: 27vw;
+  font-weight: bold;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  display: flex;
+}
+
+.flashcards div.selected {
+  border: 1vh solid rgb(42, 209, 42);
+  background-color: rgba(146, 245, 137, 0.89);
+  color: #fff;
+}
+
+.flashcards div.incorrect {
+  border: 1vh solid red;
+  background-color: rgba(255, 92, 92, 0.89);
+  color: #fff;
+}
+
+.button-overrride {
+  font-size: 1.6dvw;
+}
+
+.info {
+  font-size: 1.6dvw;
+  text-align: center;
+  height: 4dvw;
+  font-weight: bold;
+  width: 100%;
+}
+
+.badge {
+  font-size: 1.3dvw;
+  text-align: center;
+}
+
+.choice button {
+  border-radius: 1vh;
+  font-size: 2dvw;
+  width: 100%;
+  justify-content: center;
+  border: 0.2dvw solid grey;
+  background-color: #e0dede;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+.choice.correct {
+  border: 0.2dvw solid rgb(42, 209, 42);
+  background-color: rgba(146, 245, 137, 0.89);
+}
+
+.choice.incorrect {
+  border: 0.2dvw solid red;
+  background-color: rgba(255, 92, 92, 0.89);
+}
+
+@media (min-width: 576px) {
+  .info {
+    display: flex;
+  }
+  .choice {
+    display: flex;
+  }
+}
