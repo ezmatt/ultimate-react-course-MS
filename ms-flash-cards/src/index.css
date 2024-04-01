@@ -1,59 +1,116 @@
-* {
-  /* box-sizing: border-box; */
+:root {
+  --font_size: 4vw;
+  --height: calc(10px +2vw);
+  --flash_font_size: 17vw;
+  --flash_height: 30vw;
 }
 
 .flashcards div {
-  max-height: min-content;
-  border: 1vh solid grey;
-  background-color: #e0dede;
-  border-radius: 2vh;
-  font-size: 27vw;
+  border: 0.6dvh solid grey;
+  border-radius: 1dvh;
   font-weight: bold;
+  font-size: var(--flash_font_size);
+  height: var(--flash_height);
+  background-color: #e0dede;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s ease-in;
+  display: flex;
+}
+
+.flashcards div.selected {
+  border: 0.6dvh solid rgb(42, 209, 42);
+  background-color: rgba(146, 245, 137, 0.89);
+  color: #fff;
+}
+
+.flashcards div.incorrect {
+  border: 1dvh solid red;
+  background-color: rgba(255, 92, 92, 0.89);
+  color: #fff;
+}
+
+.button {
+  border-radius: 1vh;
+  font-size: var(--font_size);
+  font-weight: bold;
+  height: var(--height);
+  width: 100%;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease-in;
   display: flex;
 }
 
-.flashcards div.selected {
-  border: 1vh solid rgb(42, 209, 42);
-  background-color: rgba(146, 245, 137, 0.89);
+.button.red:hover {
+  border: 0.2dvw solid rgb(181, 30, 30);
+  background-color: rgb(181, 30, 30);
+}
+
+.button.red {
+  border: 0.2dvw solid rgb(255, 82, 82);
+  background-color: rgb(255, 82, 82);
+}
+
+.button.green:hover {
+  border: 0.2dvw solid rgb(80, 168, 72);
+  background-color: rgb(80, 168, 72);
+}
+
+.button.green {
+  border: 0.2dvw solid #04aa6d;
+  background-color: #04aa6d;
   color: #fff;
 }
 
-.flashcards div.incorrect {
-  border: 1vh solid red;
-  background-color: rgba(255, 92, 92, 0.89);
-  color: #fff;
+/* .button.green:enabled {
+  animation: jump-shaking 0.83s;
+} */
+
+.jump {
+  animation: jump-shaking 0.83s;
 }
 
-.button-overrride {
-  font-size: 1.6dvw;
+.shake {
+  animation: horizontal-shaking 0.35s;
+}
+
+.button:disabled {
+  border: 0.4dvh solid grey;
+  background-color: #e0dede;
+  color: grey;
+}
+
+.button:disabled:hover {
+  border: 0.4dvh solid grey;
+  background-color: #e0dede;
+  color: grey;
 }
 
 .info {
-  font-size: 1.6dvw;
-  text-align: center;
-  height: 4dvw;
+  border-radius: 1dvh;
+  font-size: var(--font_size);
+  height: var(--height);
   font-weight: bold;
-  width: 100%;
-}
-
-.badge {
-  font-size: 1.3dvw;
-  text-align: center;
+  justify-content: center;
+  border: 0.4dvh solid rgb(122, 178, 252);
+  background-color: #c5d4f7b3;
+  transition: all 0.3s ease-in;
+  display: flex;
 }
 
 .choice button {
   border-radius: 1vh;
-  font-size: 2dvw;
+  font-size: var(--font_size);
+  height: var(--height);
   width: 100%;
   justify-content: center;
-  border: 0.2dvw solid grey;
-  background-color: #e0dede;
+  border: 0.2dvw solid rgb(214, 208, 23);
+  background-color: #faffb3;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease-in;
+  display: flex;
 }
 
 .choice.correct {
@@ -67,10 +124,70 @@
 }
 
 @media (min-width: 576px) {
-  .info {
-    display: flex;
+  :root {
+    --font_size: 3vw;
+    --height: 5.5dvw;
+    --flash_font_size: 18vw;
+    --flash_height: 30vw;
   }
-  .choice {
-    display: flex;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --font_size: 3.2dvh;
+    --height: 6dvh;
+    --flash_font_size: 30dvh;
+    --flash_height: 50dvh;
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --font_size: 4.2dvh;
+    --height: 8dvh;
+    --flash_font_size: 35dvh;
+    --flash_height: 54dvh;
+  }
+}
+
+@keyframes jump-shaking {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateY(-4px);
+  }
+  35% {
+    transform: translateY(-4px) rotate(8deg);
+  }
+  55% {
+    transform: translateY(-4px) rotate(-8deg);
+  }
+  65% {
+    transform: translateY(-4px) rotate(8deg);
+  }
+  75% {
+    transform: translateY(-4px) rotate(-8deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes horizontal-shaking {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
