@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import { FlashCards } from "./Components/FlashCards";
 
@@ -40,11 +39,11 @@ export const valueRanges = {
   operators: [
     {
       value: "+",
-      display: "Addition (➕)",
+      display: "Add (➕)",
     },
     {
       value: "-",
-      display: "Subtraction (➖)",
+      display: "Sub (➖)",
     },
     {
       value: "*",
@@ -52,7 +51,7 @@ export const valueRanges = {
     },
     {
       value: "/",
-      display: "Division (➗)",
+      display: "Div (➗)",
     },
   ],
   range: 20,

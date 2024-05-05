@@ -11,22 +11,12 @@ export function FlashCards(params) {
   return (
     <>
       <Navigaton navKey={navKey} setNavKey={setNavKey} />
-      {navKey === "math" && (
-        <Mathematics
-          question={question}
-          setQuestion={setQuestion}
-          answer={answer}
-          setAnswer={setAnswer}
-        />
-      )}
-      {navKey === "flags" && (
-        <Flags
-          question={question}
-          setQuestion={setQuestion}
-          answer={answer}
-          setAnswer={setAnswer}
-        />
-      )}
+      <Mathematics
+        question={question}
+        setQuestion={setQuestion}
+        answer={answer}
+        setAnswer={setAnswer}
+      />
     </>
   );
 }

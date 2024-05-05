@@ -3,11 +3,13 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
+import Stack from "react-bootstrap/Stack";
 import { initialValues } from "../App";
 import { Stats } from "./Stats";
 import { MathUserInput } from "./MathUserInput";
 import { MathTest } from "./MathTest";
 import { MathPractice } from "./MathPractice";
+import { Info } from "./Info";
 
 export function Mathematics({ question, answer, setQuestion, setAnswer }) {
   // Practise or test mode
@@ -163,8 +165,8 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
   return (
     <>
       {start ? (
-        <Container fluid>
-          <Row className="m-1">
+        <section className="mathuserinput">
+          <div className="mathuserinput__questions">
             <MathUserInput
               testType={testType}
               setTestType={setTestType}
@@ -185,21 +187,67 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
               maxRange={maxRange}
               setMaxRange={setMaxRange}
             />
-          </Row>
-          <Row className="m-1">
-            <Button
-              className="button-overrride"
-              variant="success"
-              onClick={handleStart}
-            >
+          </div>
+
+          <div className="mathuserinput-start">
+            <button className="button green" onClick={handleStart}>
               Start
-            </Button>
-          </Row>
-        </Container>
+            </button>
+          </div>
+        </section>
       ) : (
-        <Container fluid>
-          {testType === "practice" ? (
-            <Row className="mb-1">
+        <section className="mathsflash">
+          <div className="mathsflash__infopanel">
+            {testType === "practice" ? (
+              <Info
+                stats={[
+                  {
+                    display: "Q's",
+                    value: `${questions}/${questionsPerSession}`,
+                  },
+                  { display: "⚡", value: flashes },
+                  {
+                    display: "❌",
+                    value: wrong,
+                  },
+                ]}
+                isCorrect={isCorrect}
+                isWrong={isWrong}
+              />
+            ) : (
+              <Info
+                stats={[
+                  {
+                    display: "Q's",
+                    value: `${questions}/${questionsPerSession}`,
+                  },
+                  { display: "✅", value: correct },
+                  {
+                    display: "❌",
+                    value: wrong,
+                  },
+                ]}
+                isCorrect={isCorrect}
+                isWrong={isWrong}
+              />
+            )}
+
+            {testType !== "practice" && (
+              <button
+                className={selected ? "button green jump" : "button green"}
+                disabled={!selected ? true : false}
+                onClick={handleNext}
+              >
+                Next
+              </button>
+            )}
+
+            <button className="button red" onClick={handleEnd}>
+              End
+            </button>
+          </div>
+          <div className="mathsflash__card">
+            {testType === "practice" ? (
               <MathPractice
                 questions={questions}
                 flashes={flashes}
@@ -215,10 +263,8 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
                 setSelected={setSelected}
                 onNext={handleNext}
               />
-            </Row>
-          ) : (
-            <>
-              <Row className="mb-1">
+            ) : (
+              <>
                 <MathTest
                   range={maxRange}
                   multiType={multiType}
@@ -237,44 +283,13 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
                   isWrong={isWrong}
                   setIsWrong={setIsWrong}
                 />
-              </Row>
-            </>
-          )}
-          <Row className="mb-2 mx-0">
-            <Col xs={9}>
-              <Info
-                questions={`${questions}/${questionsPerSession}`}
-                isCorrect={isCorrect}
-                correctAmount={correct}
-                isWrong={isWrong}
-                wrongAmount={wrong}
-              />
-            </Col>
-            <Col>
-              <Row className="mb-2 mx-0">
-                <button
-                  className={selected ? "button green jump" : "button green"}
-                  disabled={!selected ? true : false}
-                  onClick={handleNext}
-                >
-                  Next
-                </button>
-              </Row>
-              <Row className="mb-2 mx-0">
-                <button className="button red" onClick={handleEnd}>
-                  End
-                </button>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
+              </>
+            )}
+          </div>
+        </section>
       )}
     </>
   );
-}
-
-function Info(params) {
-  return <div></div>;
 }
 
 // Miscellaneous possibly global funtions
