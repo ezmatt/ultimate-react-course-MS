@@ -10,8 +10,8 @@ export function Choice({ correct, selected, onClick, children, clicked }) {
         selected
           ? correct
             ? Number(clicked) === Number(children)
-              ? "choice correct jump"
-              : "choice correct"
+              ? "choice selected jump"
+              : "choice selected"
             : Number(clicked) === Number(children)
             ? "choice incorrect shake"
             : "choice incorrect"

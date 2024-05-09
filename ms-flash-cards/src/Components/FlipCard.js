@@ -16,21 +16,33 @@ export function FlipCard({
   }
 
   return (
-    <div className="flashcards">
+    <>
       {isStatic ? (
         <div
-          className={selected ? (correctAnswer ? "selected" : "incorrect") : ""}
+          className={
+            selected
+              ? correctAnswer
+                ? "flashcards selected"
+                : "flashcards incorrect"
+              : "flashcards"
+          }
         >
           <p>{selected ? answer : question}</p>
         </div>
       ) : (
         <div
           onClick={(e) => handleClick(e)}
-          className={selected ? (correctAnswer ? "selected" : "incorrect") : ""}
+          className={
+            selected
+              ? correctAnswer
+                ? "flashcards selected"
+                : "flashcards incorrect"
+              : "flashcards"
+          }
         >
           <p>{selected ? answer : question}</p>
         </div>
       )}
-    </div>
+    </>
   );
 }

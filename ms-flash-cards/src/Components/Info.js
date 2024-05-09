@@ -1,11 +1,13 @@
 export function Info({ stats, isCorrect, isWrong }) {
   return (
-    <div className="info">
+    <>
       {stats.map((stat) => (
-        <span>
-          {stat.display}: {stat.value}
-        </span>
+        <div className="stat">
+          <p>
+            {stat.display}: {stat.value}
+          </p>
+        </div>
       ))}
-    </div>
+    </>
   );
 }

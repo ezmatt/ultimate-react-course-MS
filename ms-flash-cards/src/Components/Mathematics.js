@@ -1,15 +1,10 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import Stack from "react-bootstrap/Stack";
 import { initialValues } from "../App";
-import { Stats } from "./Stats";
 import { MathUserInput } from "./MathUserInput";
 import { MathTest } from "./MathTest";
 import { MathPractice } from "./MathPractice";
 import { Info } from "./Info";
+import { Choice } from "./Choice";
 
 export function Mathematics({ question, answer, setQuestion, setAnswer }) {
   // Practise or test mode
@@ -56,21 +51,30 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
   const [wrong, setWrong] = useState(0);
   const [isCorrect, setIsCorrect] = useState(false);
   const [isWrong, setIsWrong] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [showScores, setShowScores] = useState(false);
   // const [questionTracker, setQuestionTracker] = useState([]);
   let questionTracker = [];
 
   // Let's go!
   function handleStart() {
     setStart((start) => false);
+    reset();
     nextProblem();
   }
 
   //reset values back to starting values
   function handleEnd() {
+    setStart((start) => true);
+    testType === "practice" ? setShowScores(false) : setShowScores(true);
+    // reset();
+  }
+
+  function reset() {
     setQuestions(1);
     setFlashes(0);
     setSelected((selected) => false);
-    setStart((start) => true);
+
     setCorrect(0);
     setWrong(0);
     questionTracker = [];
@@ -162,11 +166,26 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
     setIsWrong(false);
   }
 
+  function handleAnswer(choiceSelected) {
+    setClicked(choiceSelected);
+    if (Number(choiceSelected) === answer) {
+      setCorrect((amount) => amount + 1);
+      setIsCorrect(true);
+      setIsWrong(false);
+    } else {
+      setWrong((amount) => amount + 1);
+      setIsCorrect(false);
+      setIsWrong(true);
+    }
+    setSelected(true);
+    //setNext()
+  }
+
   return (
-    <>
+    <section className="math">
       {start ? (
-        <section className="mathuserinput">
-          <div className="mathuserinput__questions">
+        <section className="userinput">
+          <div className="questions">
             <MathUserInput
               testType={testType}
               setTestType={setTestType}
@@ -188,17 +207,18 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
               setMaxRange={setMaxRange}
             />
           </div>
+          {showScores && (
+            <Scores questions={questions} correct={correct} wrong={wrong} />
+          )}
 
-          <div className="mathuserinput-start">
-            <button className="button green" onClick={handleStart}>
-              Start
-            </button>
-          </div>
+          <button className="button green" onClick={handleStart}>
+            Start
+          </button>
         </section>
       ) : (
         <section className="mathsflash">
-          <div className="mathsflash__infopanel">
-            {testType === "practice" ? (
+          {testType === "practice" ? (
+            <div className="info">
               <Info
                 stats={[
                   {
@@ -214,81 +234,135 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
                 isCorrect={isCorrect}
                 isWrong={isWrong}
               />
-            ) : (
-              <Info
-                stats={[
-                  {
-                    display: "Q's",
-                    value: `${questions}/${questionsPerSession}`,
-                  },
-                  { display: "✅", value: correct },
-                  {
-                    display: "❌",
-                    value: wrong,
-                  },
-                ]}
-                isCorrect={isCorrect}
-                isWrong={isWrong}
-              />
-            )}
-
-            {testType !== "practice" && (
-              <button
-                className={selected ? "button green jump" : "button green"}
-                disabled={!selected ? true : false}
-                onClick={handleNext}
-              >
-                Next
-              </button>
-            )}
-
-            <button className="button red" onClick={handleEnd}>
-              End
-            </button>
-          </div>
-          <div className="mathsflash__card">
-            {testType === "practice" ? (
-              <MathPractice
-                questions={questions}
-                flashes={flashes}
-                operator={operator}
-                multiType={multiType}
-                timesTable={timesTable}
-                timesTableRange={timesTableRange}
-                minRange={minRange}
-                maxRange={maxRange}
-                question={question}
-                answer={answer}
-                selected={selected}
-                setSelected={setSelected}
-                onNext={handleNext}
-              />
-            ) : (
-              <>
-                <MathTest
-                  range={maxRange}
-                  multiType={multiType}
-                  questions={questions}
-                  flashes={flashes}
-                  question={question}
-                  answer={answer}
-                  selected={selected}
-                  setSelected={setSelected}
-                  onNext={handleNext}
-                  choices={choices}
-                  setCorrect={setCorrect}
-                  setWrong={setWrong}
+            </div>
+          ) : (
+            <>
+              <div className="info">
+                <Info
+                  stats={[
+                    {
+                      display: "Q's",
+                      value: `${questions}/${questionsPerSession}`,
+                    },
+                    { display: "✅", value: correct },
+                    {
+                      display: "❌",
+                      value: wrong,
+                    },
+                  ]}
                   isCorrect={isCorrect}
-                  setIsCorrect={setIsCorrect}
                   isWrong={isWrong}
-                  setIsWrong={setIsWrong}
                 />
-              </>
-            )}
-          </div>
+              </div>
+              <div className="choices">
+                {choices.map((choice, key) => (
+                  <Choice
+                    selected={selected}
+                    id={key}
+                    onClick={handleAnswer}
+                    correct={choice.correct}
+                    clicked={clicked}
+                  >
+                    {choice.display}
+                  </Choice>
+                ))}
+              </div>
+            </>
+          )}
+
+          {testType === "practice" ? (
+            <MathPractice
+              questions={questions}
+              flashes={flashes}
+              operator={operator}
+              multiType={multiType}
+              timesTable={timesTable}
+              timesTableRange={timesTableRange}
+              minRange={minRange}
+              maxRange={maxRange}
+              question={question}
+              answer={answer}
+              selected={selected}
+              setSelected={setSelected}
+              onNext={handleNext}
+            />
+          ) : (
+            <MathTest
+              range={maxRange}
+              multiType={multiType}
+              questions={questions}
+              flashes={flashes}
+              question={question}
+              answer={answer}
+              selected={selected}
+              setSelected={setSelected}
+              onNext={handleNext}
+              choices={choices}
+              setCorrect={setCorrect}
+              setWrong={setWrong}
+              isCorrect={isCorrect}
+              setIsCorrect={setIsCorrect}
+              isWrong={isWrong}
+              setIsWrong={setIsWrong}
+            />
+          )}
+          {/* <div className="buttons"> */}
+          {testType !== "practice" && (
+            <button
+              className="button green"
+              disabled={!selected ? true : false}
+              onClick={handleNext}
+            >
+              Next
+            </button>
+          )}
+
+          <button className="button red" onClick={handleEnd}>
+            End
+          </button>
+          {/* </div> */}
         </section>
       )}
-    </>
+    </section>
+  );
+}
+
+function Scores({ questions, correct, wrong }) {
+  var percent = (correct / questions) * 100;
+  var message = "Perfect";
+
+  return (
+    // <div className="scores">
+    //   <div className="stats">
+    //     <span>Questions: {questions}</span>
+    //     {/* <span>Correct: {correct}</span> */}
+    //     <span>Wrong: {wrong}</span>
+    //   </div>
+    //   <div className="message">{percent}</div>
+    // </div>
+    <div className="scores">
+      <div className="info">
+        <Info
+          stats={[
+            {
+              display: "Questions",
+              value: questions,
+            },
+            { display: "Correct", value: correct },
+            {
+              display: "Wrong",
+              value: wrong,
+            },
+          ]}
+          isCorrect="false"
+          isWrong="false"
+        />
+      </div>
+      <div className="message">
+        <p>{percent}%</p>
+        <p>{message}</p>
+      </div>
+    </div>
   );
 }
 

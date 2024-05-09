@@ -1,0 +1,47 @@
+.header__nav {
+  display: flex;
+  overflow: hidden;
+  background: var(--primary-color);
+  border-radius: 0 0 10px 10px;
+  height: 10vh;
+}
+
+.header__logo h4 {
+  padding: 3vmin;
+  font-weight: 700;
+  font-size: 4vmin;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.header__menu,
+.header__menu-mobile {
+  padding: 20px;
+
+  flex: 1.236;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4vmin;
+
+  list-style: none;
+  color: #fff;
+}
+
+.header__menu li {
+  font-weight: 700;
+  line-height: 20px;
+  font-size: 2.5vmin;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.header__menu li:hover,
+.header__menu li:focus {
+  color: var(--pale-dogwood);
+}
+
+.header__nav a {
+  text-decoration: none;
+  color: inherit;
+}

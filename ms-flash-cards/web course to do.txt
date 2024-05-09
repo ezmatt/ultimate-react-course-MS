@@ -1,0 +1,6 @@
+1. CSS Flex box - Native CSS
+2. React Redux - State Management Framework - Temp DB for user information
+3. Credit Card example - michaelhardie63
+4. Build a website
+5. Chrome extension - daily dev
+6. Scrub on Git usage

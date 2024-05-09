@@ -1,4 +1,4 @@
-import "./index.css";
+import "./CSS/index.css";
 import { FlashCards } from "./Components/FlashCards";
 
 // Create an ini or db record for default values

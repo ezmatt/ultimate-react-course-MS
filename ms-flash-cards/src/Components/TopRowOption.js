@@ -1,6 +1,6 @@
 export function TopRowOption({ value, label, setState, children }) {
   return (
-    <div className="button">
+    <div className="option">
       <p>{label}</p>
       <select
         value={value}
