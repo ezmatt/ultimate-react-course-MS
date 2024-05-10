@@ -5,6 +5,7 @@ import { MathTest } from "./MathTest";
 import { MathPractice } from "./MathPractice";
 import { Info } from "./Info";
 import { Choice } from "./Choice";
+import { Scores } from "./Scores";
 
 export function Mathematics({ question, answer, setQuestion, setAnswer }) {
   // Practise or test mode
@@ -324,45 +325,6 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
         </section>
       )}
     </section>
-  );
-}
-
-function Scores({ questions, correct, wrong }) {
-  var percent = (correct / questions) * 100;
-  var message = "Perfect";
-
-  return (
-    // <div className="scores">
-    //   <div className="stats">
-    //     <span>Questions: {questions}</span>
-    //     {/* <span>Correct: {correct}</span> */}
-    //     <span>Wrong: {wrong}</span>
-    //   </div>
-    //   <div className="message">{percent}</div>
-    // </div>
-    <div className="scores">
-      <div className="info">
-        <Info
-          stats={[
-            {
-              display: "Questions",
-              value: questions,
-            },
-            { display: "Correct", value: correct },
-            {
-              display: "Wrong",
-              value: wrong,
-            },
-          ]}
-          isCorrect="false"
-          isWrong="false"
-        />
-      </div>
-      <div className="message">
-        <p>{percent}%</p>
-        <p>{message}</p>
-      </div>
-    </div>
   );
 }
 
