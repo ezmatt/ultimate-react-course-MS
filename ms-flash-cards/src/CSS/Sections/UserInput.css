@@ -32,4 +32,37 @@
 
   background-color: var(--sky-blue);
   color: #fff;
+
+  transition: all 0.15s ease-in;
+}
+
+.userinput .questions .option:hover,
+.userinput .questions .option:focus {
+  /* transition: all 0.15s ease-in; */
+  background-color: hsla(191, 51%, 63%, 0.7);
+}
+
+.option p {
+  font-size: var(--font_size);
+  font-weight: 600;
+  color: inherit;
+}
+
+.option select {
+  font-size: calc(var(--font_size) - 0.6rem);
+  flex: 1;
+  text-align: right;
+  background-color: inherit;
+  color: inherit;
+  border-style: none;
+  cursor: pointer;
+}
+
+.option select:hover {
+  color: var(--pale-dogwood);
+  background-color: #fff;
+}
+
+.option option {
+  font-size: inherit;
 }

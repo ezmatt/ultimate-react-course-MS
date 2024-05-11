@@ -41,7 +41,11 @@
   color: var(--pale-dogwood);
 }
 
-.header__nav a {
+.header__nav button {
   text-decoration: none;
   color: inherit;
+  font-size: inherit;
+  text-transform: uppercase;
+  background-color: var(--primary-color);
+  border-style: none;
 }

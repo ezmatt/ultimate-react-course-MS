@@ -9,7 +9,8 @@ export function Navigaton({ navKey, setNavKey }) {
 
         <ul className="header__menu">
           <li>
-            <a href="math">Mathematics</a>
+            <button>Mathematics</button>
+            {/* <a href="math">Mathematics</a> */}
           </li>
           <li>
             <a href="flags">Flags</a>

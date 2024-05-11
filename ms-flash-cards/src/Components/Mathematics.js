@@ -226,7 +226,7 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
                     display: "Q's",
                     value: `${questions}/${questionsPerSession}`,
                   },
-                  { display: "⚡", value: flashes },
+                  { display: "⚡", value: Math.floor(flashes / 2) + 1 },
                   {
                     display: "❌",
                     value: wrong,

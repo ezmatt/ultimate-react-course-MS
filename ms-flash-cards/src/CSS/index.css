@@ -3,6 +3,8 @@
 @import url("Sections/header.css");
 @import url("Sections/UserInput.css");
 @import url("Sections/MathFlash.css");
+@import url("Sections/default.css");
+@import url("Sections/animations.css");
 
 :root {
   --color-creamson: #fff0de;
@@ -12,14 +14,11 @@
   --copper: rgba(196, 115, 53, 1);
   --caf-noir: rgba(86, 53, 30, 1);
   --crimson: hsla(352, 70%, 50%, 1);
-  --pale-dogwood: hsla(15, 31%, 72%, 1);
+  --pale-dogwood: hsl(253, 96%, 41%);
   --dodger-blue: hsla(203, 99%, 48%, 1);
   --oxford-blue: hsla(209, 70%, 13%, 1);
   --sky-blue: hsla(191, 61%, 63%, 1);
   --red_button: rgb(244, 75, 75);
-  --red_button_hover: hsla(0, 100%, 35%, 1);
-  --green_button: hsla(120, 67%, 49%, 1);
-  --green_button_hover: hsla(120, 77%, 29%, 1);
   --button_color: var(--color-creamson);
   --panel_color: var(--dodger-blue);
   --primary-color: hsla(209, 70%, 13%, 1);
@@ -51,57 +50,20 @@ body {
   height: calc(90vh - 10px); */
 }
 
-button {
+.math button {
   /* flex: 1; */
+  margin-bottom: 10px;
   align-self: stretch;
   height: var(--button_height);
   border-radius: 10px;
 
   color: var(--button_color);
-  transition: all 0.3s ease-in;
-
+  transition: all 0.15s ease-in;
   font-size: var(--font_size);
   line-height: 2em;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
-}
-
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.option p {
-  font-size: var(--font_size);
-  font-weight: 600;
-  background-color: inherit;
-  color: inherit;
-}
-
-.option select {
-  font-size: calc(var(--font_size) - 0.6rem);
-  flex: 1;
-  text-align: right;
-  background-color: inherit;
-  color: inherit;
-  border-style: none;
-  cursor: pointer;
-}
-
-.option select:hover {
-  color: var(--azure-web);
-}
-
-.option option {
-  font-size: inherit;
 }
 
 .info {
@@ -142,7 +104,7 @@ button {
 
   background-image: linear-gradient(
     to bottom right,
-    hsla(60, 77%, 83%, 1),
+    rgb(248, 248, 157),
     hsla(60, 77%, 83%, 0.5)
   );
 
@@ -159,54 +121,34 @@ button {
 .scores .message p {
   font-weight: 600;
   font-size: 15vmin;
-  color: var(--oxford-blue);
 }
 
 button.red:hover,
 button.red:focus {
-  border: 2px solid var(--red_button_hover);
-  background-color: var(--red_button_hover);
+  border: 2px solid hsla(0, 97%, 33%, 1);
+  background-color: hsla(0, 87%, 33%, 1);
 }
 
 button.red {
-  border: 2px solid var(--red_button_hover);
-  background-color: var(--red_button);
-}
-
-button.green {
-  border: 2px solid var(--green_button_hover);
-  background-color: var(--green_button);
+  border: 2px solid hsla(0, 97%, 43%, 1);
+  background-color: hsla(0, 97%, 53%, 1);
 }
 
 .button.green:hover,
 .button.green:focus {
-  border: 2px solid var(--green_button_hover);
-  background-color: var(--green_button_hover);
+  border: 2px solid hsla(130, 97%, 34%, 1);
+  background-color: hsla(130, 87%, 34%, 1);
+  /* color: #777; */
+}
+
+button.green {
+  border: 2px solid hsla(130, 77%, 39%, 1);
+  background-color: hsla(130, 77%, 49%, 1);
 }
 
 /* .button.green:enabled {
   animation: jump-shaking 0.83s;
 } */
-
-.jump {
-  animation: jump-shaking 0.83s;
-}
-
-.shake {
-  animation: horizontal-shaking 0.35s;
-}
-
-.button:disabled {
-  border: 2px solid grey;
-  background-color: #e0dede;
-  color: grey;
-}
-
-.button:disabled:hover {
-  border: 2px solid grey;
-  background-color: #e0dede;
-  color: grey;
-}
 
 @media (min-width: 768px) {
   :root {
@@ -220,48 +162,3 @@ button.green {
   }
 }
 */
-
-@keyframes jump-shaking {
-  10% {
-    transform: translateY(-10px) rotate(90deg);
-  }
-  25% {
-    transform: translateY(-15px) rotate(180deg);
-  }
-  35% {
-    transform: translateY(-20px) rotate(270deg);
-  }
-  45% {
-    transform: translateY(-30px) rotate(360deg);
-  }
-  55% {
-    transform: translateY(-20px) rotate(90deg);
-  }
-  65% {
-    transform: translateY(-10px) rotate(300deg);
-  }
-  75% {
-    transform: translateY(-10px) rotate(360deg);
-  }
-  100% {
-    transform: translateY(0) rotate(360deg);
-  }
-}
-
-@keyframes horizontal-shaking {
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(5px);
-  }
-  50% {
-    transform: translateX(-5px);
-  }
-  75% {
-    transform: translateX(5px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
