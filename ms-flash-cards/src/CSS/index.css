@@ -3,6 +3,7 @@
 @import url("Sections/header.css");
 @import url("Sections/UserInput.css");
 @import url("Sections/MathFlash.css");
+@import url("Sections/flagFlash.css");
 @import url("Sections/default.css");
 @import url("Sections/animations.css");
 
@@ -50,9 +51,45 @@ body {
   height: calc(90vh - 10px); */
 }
 
-.math button {
+.flashcards {
+  flex: 1;
+
+  background: #fff;
+  border-radius: 10px;
+  border: 10px solid grey;
+
+  cursor: pointer;
+  font-weight: bold;
+
+  text-align: center;
+  transition: all 0.4s ease-in;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flashcards p {
+  font-size: 30vmin;
+}
+
+.selected,
+.choice.selected {
+  border: 10px solid hsl(120, 67%, 49%);
+  background-color: rgba(146, 245, 137, 0.89);
+  color: #fff;
+}
+
+.incorrect,
+.choice.incorrect {
+  border: 10px solid red;
+  background-color: rgba(255, 92, 92, 0.89);
+  color: #fff;
+}
+
+button {
   /* flex: 1; */
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   align-self: stretch;
   height: var(--button_height);
   border-radius: 10px;
@@ -134,8 +171,8 @@ button.red {
   background-color: hsla(0, 97%, 53%, 1);
 }
 
-.button.green:hover,
-.button.green:focus {
+button.green:hover,
+button.green:focus {
   border: 2px solid hsla(130, 97%, 34%, 1);
   background-color: hsla(130, 87%, 34%, 1);
   /* color: #777; */

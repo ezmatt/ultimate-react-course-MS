@@ -36,16 +36,20 @@
   cursor: pointer;
 }
 
-.header__menu li:hover,
-.header__menu li:focus {
-  color: var(--pale-dogwood);
+.header__nav a:hover,
+.header__nav a:focus {
+  color: var(--sky-blue);
 }
 
-.header__nav button {
+.header__nav a {
   text-decoration: none;
   color: inherit;
   font-size: inherit;
   text-transform: uppercase;
   background-color: var(--primary-color);
   border-style: none;
+}
+
+.header__nav a.active {
+  color: var(--dodger-blue);
 }

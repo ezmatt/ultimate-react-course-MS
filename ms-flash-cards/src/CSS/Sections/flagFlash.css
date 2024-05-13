@@ -1,0 +1,12 @@
+.flagsflash {
+  flex: 1;
+  margin-top: 10px;
+  height: calc(90vh - 10px);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: stretch;
+}

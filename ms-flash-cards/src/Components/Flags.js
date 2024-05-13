@@ -10,7 +10,7 @@ export function Flags(params) {
   }
 
   return (
-    <div>
+    <section className="flagsflash">
       <FlipCard
         question={"Flags"}
         answer={"Australia"}
@@ -20,6 +20,6 @@ export function Flags(params) {
         correctAnswer={true}
         isStatic={false}
       />
-    </div>
+    </section>
   );
 }
