@@ -1,7 +1,7 @@
 import { Info } from "./Info";
 
-export function Scores({ questions, correct, wrong }) {
-  var percent = (correct / questions) * 100;
+export function Scores({ questions, correct, wrong, setShowScores }) {
+  var percent = Math.floor((correct / questions) * 100);
   var message = "Perfect";
   var classname = "";
 
@@ -45,6 +45,9 @@ export function Scores({ questions, correct, wrong }) {
         <p>{percent}%</p>
         <p className={classname}>{message}</p>
       </div>
+      <button className="button" onClick={() => setShowScores(false)}>
+        Done
+      </button>
     </div>
   );
 }

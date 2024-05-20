@@ -1,23 +1,70 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { IoClose, IoMenu } from "react-icons/io5";
 
 export function Navigaton() {
-  return (
-    <nav className="header__nav">
-      <div className="header__logo">
-        <NavLink to="/">
-          <h4>Flash Cards</h4>
-        </NavLink>
-        <div className="header__logo-overlay"></div>
-      </div>
+  const [showMenu, setShowMenu] = useState(false);
 
-      <ul className="header__menu">
-        <li>
-          <NavLink to="/maths">Mathematics</NavLink>
-        </li>
-        <li>
-          <NavLink to="/flags">flags</NavLink>
-        </li>
-      </ul>
-    </nav>
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
+  const closeMenuOnMobile = () => {
+    if (window.innerWidth <= 1150) {
+      setShowMenu(false);
+    }
+  };
+
+  return (
+    <header className="header">
+      <nav className="nav container">
+        <p className="nav__logo">Flash Cards</p>
+
+        <div
+          className={`nav__menu${showMenu ? " show-menu" : ""}`}
+          id="nav-menu"
+        >
+          <ul className="nav__list">
+            <li className="nav__item">
+              <NavLink
+                className="nav__link"
+                to="/maths"
+                onClick={closeMenuOnMobile}
+              >
+                Mathematics
+              </NavLink>
+            </li>
+
+            <li className="nav__item">
+              <NavLink
+                className="nav__link"
+                to="/flags"
+                onClick={closeMenuOnMobile}
+              >
+                Flags
+              </NavLink>
+            </li>
+
+            <li className="nav__item">
+              <NavLink
+                className="nav__link"
+                to="/language"
+                onClick={closeMenuOnMobile}
+              >
+                Language
+              </NavLink>
+            </li>
+          </ul>
+
+          <div className="nav__close" id="nav-close" onClick={toggleMenu}>
+            <IoClose />
+          </div>
+        </div>
+
+        <div className="nav__toggle" id="nav-toggle" onClick={toggleMenu}>
+          <IoMenu />
+        </div>
+      </nav>
+    </header>
   );
 }

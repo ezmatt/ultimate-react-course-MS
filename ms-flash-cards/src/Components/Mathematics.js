@@ -56,6 +56,7 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
   const [showScores, setShowScores] = useState(false);
   // const [questionTracker, setQuestionTracker] = useState([]);
   let questionTracker = [];
+  console.log(questionTracker);
 
   // Let's go!
   function handleStart() {
@@ -66,8 +67,14 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
 
   //reset values back to starting values
   function handleEnd() {
+    console.log(questions, questionsPerSession, testType);
     setStart((start) => true);
-    testType === "practice" ? setShowScores(false) : setShowScores(true);
+    if (questions === questionsPerSession && testType === "test") {
+      setShowScores(true);
+    } else {
+      setShowScores(false);
+    }
+
     // reset();
   }
 
@@ -117,7 +124,7 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
       }
     } while (checkNumbersForRepetition(num1, num2, questionTracker));
 
-    questionTracker.push([num1, num2]);
+    questionTracker.push(num1, num2);
     console.log(questionTracker);
 
     const choiceAnswer = Number(operators[operator].fn(num1, num2));
@@ -185,59 +192,79 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
   return (
     <section className="math">
       {start ? (
-        <section className="userinput">
-          <div className="questions">
-            <MathUserInput
-              testType={testType}
-              setTestType={setTestType}
-              questionsPerSession={questionsPerSession}
-              setQuestionsPerSession={setQuestionsPerSession}
-              flashLimit={flashLimit}
-              setFlashLimit={setFlashLimit}
-              operator={operator}
-              setOperator={setOperator}
-              multiType={multiType}
-              setMultiType={setMultiType}
-              timesTable={timesTable}
-              setTimesTable={setTimesTable}
-              timesTableRange={timesTableRange}
-              setTimesTableRange={setTimesTableRange}
-              minRange={minRange}
-              setMinRange={setMinRange}
-              maxRange={maxRange}
-              setMaxRange={setMaxRange}
-            />
-          </div>
-          {showScores && (
-            <Scores questions={questions} correct={correct} wrong={wrong} />
-          )}
+        <>
+          {showScores ? (
+            <section className="scores">
+              <Scores
+                questions={questions}
+                correct={correct}
+                wrong={wrong}
+                setShowScores={setShowScores}
+              />
+            </section>
+          ) : (
+            <section className="userinput">
+              <div className="questions">
+                <MathUserInput
+                  testType={testType}
+                  setTestType={setTestType}
+                  questionsPerSession={questionsPerSession}
+                  setQuestionsPerSession={setQuestionsPerSession}
+                  flashLimit={flashLimit}
+                  setFlashLimit={setFlashLimit}
+                  operator={operator}
+                  setOperator={setOperator}
+                  multiType={multiType}
+                  setMultiType={setMultiType}
+                  timesTable={timesTable}
+                  setTimesTable={setTimesTable}
+                  timesTableRange={timesTableRange}
+                  setTimesTableRange={setTimesTableRange}
+                  minRange={minRange}
+                  setMinRange={setMinRange}
+                  maxRange={maxRange}
+                  setMaxRange={setMaxRange}
+                />
+              </div>
 
-          <button className="button green" onClick={handleStart}>
-            Start
-          </button>
-        </section>
+              <button className="button green" onClick={handleStart}>
+                Start
+              </button>
+            </section>
+          )}
+        </>
       ) : (
         <section className="mathsflash">
           {testType === "practice" ? (
-            <div className="info">
-              <Info
-                stats={[
-                  {
-                    display: "Q's",
-                    value: `${questions}/${questionsPerSession}`,
-                  },
-                  { display: "⚡", value: Math.floor(flashes / 2) + 1 },
-                  {
-                    display: "❌",
-                    value: wrong,
-                  },
-                ]}
-                isCorrect={isCorrect}
-                isWrong={isWrong}
-              />
-            </div>
-          ) : (
             <>
+              <div className="info">
+                <Info
+                  stats={[
+                    {
+                      display: "Q's",
+                      value: `${questions}/${questionsPerSession}`,
+                    },
+                    { display: "⚡", value: Math.floor(flashes / 2) + 1 },
+                    {
+                      display: "❌",
+                      value: wrong,
+                    },
+                  ]}
+                  isCorrect={isCorrect}
+                  isWrong={isWrong}
+                />
+              </div>
+
+              <MathPractice
+                question={question}
+                answer={answer}
+                selected={selected}
+                setSelected={setSelected}
+                onNext={handleNext}
+              />
+            </>
+          ) : (
+            <section className="mathtest">
               <div className="info">
                 <Info
                   stats={[
@@ -268,60 +295,21 @@ export function Mathematics({ question, answer, setQuestion, setAnswer }) {
                   </Choice>
                 ))}
               </div>
-            </>
-          )}
 
-          {testType === "practice" ? (
-            <MathPractice
-              questions={questions}
-              flashes={flashes}
-              operator={operator}
-              multiType={multiType}
-              timesTable={timesTable}
-              timesTableRange={timesTableRange}
-              minRange={minRange}
-              maxRange={maxRange}
-              question={question}
-              answer={answer}
-              selected={selected}
-              setSelected={setSelected}
-              onNext={handleNext}
-            />
-          ) : (
-            <MathTest
-              range={maxRange}
-              multiType={multiType}
-              questions={questions}
-              flashes={flashes}
-              question={question}
-              answer={answer}
-              selected={selected}
-              setSelected={setSelected}
-              onNext={handleNext}
-              choices={choices}
-              setCorrect={setCorrect}
-              setWrong={setWrong}
-              isCorrect={isCorrect}
-              setIsCorrect={setIsCorrect}
-              isWrong={isWrong}
-              setIsWrong={setIsWrong}
-            />
-          )}
-          {/* <div className="buttons"> */}
-          {testType !== "practice" && (
-            <button
-              className="button green"
-              disabled={!selected ? true : false}
-              onClick={handleNext}
-            >
-              Next
-            </button>
+              <MathTest
+                question={question}
+                answer={answer}
+                selected={selected}
+                setSelected={setSelected}
+                onNext={handleNext}
+                isCorrect={isCorrect}
+              />
+            </section>
           )}
 
           <button className="button red" onClick={handleEnd}>
             End
           </button>
-          {/* </div> */}
         </section>
       )}
     </section>

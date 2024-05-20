@@ -2,14 +2,6 @@ import { FlipCard } from "./FlipCard";
 import { Stats } from "./Stats";
 
 export function MathPractice({
-  questions,
-  flashes,
-  operator,
-  multiType,
-  timesTable,
-  timesTableRange,
-  minRange,
-  maxRange,
   question,
   answer,
   selected,

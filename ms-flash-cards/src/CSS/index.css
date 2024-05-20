@@ -24,8 +24,10 @@
   --panel_color: var(--dodger-blue);
   --primary-color: hsla(209, 70%, 13%, 1);
   --background-color: var(--lapis-lazuli);
-  --font_size: 2.3rem;
-  --button_height: 5rem;
+  --font_size: 3.5rem;
+  --z-fixed: 100;
+  --header_height: 10vh;
+  --option_gap: 10px;
 }
 
 * {
@@ -37,18 +39,25 @@
 
 body {
   max-width: 1800px;
-  min-width: 375;
+  min-width: 300px;
   height: 100vh;
   margin: 0 auto;
   background-color: var(--background-color);
-  font-size: var(--font_size);
+  /* font-size: var(--font_size); */
   font-family: "Roboto", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
 .math {
   display: flex;
-  /* margin-top: 10px;
-  height: calc(90vh - 10px); */
+  padding: 1vh;
+  height: 90vh;
 }
 
 .flashcards {
@@ -70,34 +79,44 @@ body {
 }
 
 .flashcards p {
-  font-size: 30vmin;
+  font-size: 29vmin;
 }
 
-.selected,
-.choice.selected {
+.selected {
   border: 10px solid hsl(120, 67%, 49%);
   background-color: rgba(146, 245, 137, 0.89);
   color: #fff;
 }
 
-.incorrect,
-.choice.incorrect {
+.choice.selected {
+  border: 0.2rem solid hsl(120, 67%, 49%);
+  background-color: rgba(146, 245, 137, 0.89);
+  color: #fff;
+}
+
+.incorrect {
   border: 10px solid red;
   background-color: rgba(255, 92, 92, 0.89);
   color: #fff;
 }
 
+.choice.incorrect {
+  border: 0.2rem solid red;
+  background-color: rgba(255, 92, 92, 0.89);
+  color: #fff;
+}
+
 button {
-  /* flex: 1; */
-  /* margin-bottom: 10px; */
   align-self: stretch;
-  height: var(--button_height);
+  min-height: 55px;
+  height: 10vh;
   border-radius: 10px;
 
   color: var(--button_color);
   transition: all 0.15s ease-in;
   font-size: var(--font_size);
-  line-height: 2em;
+  background-color: var(--dodger-blue);
+
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -105,25 +124,22 @@ button {
 
 .info {
   display: flex;
-  overflow: hidden;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  background: var(--panel_color);
-  border-radius: 10px;
+  gap: 1vw;
+  height: 10vh;
 }
 
 .info .stat {
   flex: 1;
 
-  margin: 10px;
-  padding: 10px;
+  line-height: 10vh;
   background-color: var(--sky-blue);
   border-radius: 10px;
-
+  height: 10vh;
   font-size: var(--font_size);
   font-weight: 600;
 
   text-align: center;
+  justify-self: center;
 }
 
 .scores {
@@ -134,10 +150,11 @@ button {
   justify-content: flex-start;
 
   color: #fff;
+  gap: 1vh;
 }
 
 .scores .message {
-  flex: 1 2;
+  flex: 1;
 
   background-image: linear-gradient(
     to bottom right,
@@ -147,8 +164,6 @@ button {
 
   border-radius: 10px;
 
-  margin-top: 10px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -157,7 +172,7 @@ button {
 
 .scores .message p {
   font-weight: 600;
-  font-size: 15vmin;
+  font-size: 14vh;
 }
 
 button.red:hover,
@@ -186,16 +201,42 @@ button.green {
 /* .button.green:enabled {
   animation: jump-shaking 0.83s;
 } */
-
-@media (min-width: 768px) {
+/* 
+@media (max-width: 1300px) {
   :root {
-    /* --font_size: 1.5em; */
+    --font_size: 1.6rem;
+    --option_gap: 20px;
   }
 }
 
-/* @media (min-width: 992px) {
+@media (max-width: 992px) {
   :root {
-    --font_size: 2em;
+    --font_size: 1.4rem;
+    --option_gap: 15px;
   }
 }
-*/
+
+@media (max-width: 540px) {
+  :root {
+    --font_size: 1.7rem;
+    --option_gap: 10px;
+  }
+}*/
+
+@media only screen and (orientation: landscape) {
+  :root {
+    --font_size: 2.8vw;
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  :root {
+    --font_size: 2.8vh;
+  }
+}
+
+@media (min-width: 1100px) {
+  :root {
+    --font_size: 34px;
+  }
+}

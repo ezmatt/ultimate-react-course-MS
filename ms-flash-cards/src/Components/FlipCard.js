@@ -19,6 +19,7 @@ export function FlipCard({
     <>
       {isStatic ? (
         <div
+          onClick={(e) => handleClick(e)}
           className={
             selected
               ? correctAnswer

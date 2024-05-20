@@ -1,55 +1,91 @@
-.header__nav {
-  display: flex;
-  overflow: hidden;
+.header {
+  width: 100%;
   background: var(--primary-color);
+  /* background-color: transparent; */
   border-radius: 0 0 10px 10px;
-  height: 10vh;
+  font-size: var(--font_size);
 }
 
-.header__logo h4 {
-  padding: 3vmin;
-  font-weight: 700;
-  font-size: 4vmin;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.header__menu,
-.header__menu-mobile {
-  padding: 20px;
-
-  flex: 1.236;
+.nav {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  gap: 4vmin;
+  justify-content: space-between;
+  position: relative;
+  height: var(--header_height);
+  padding: 1rem;
+}
 
-  list-style: none;
+.nav__logo {
+  transition: color 0.4s;
+  font-weight: 700;
+  text-transform: uppercase;
   color: #fff;
 }
 
-.header__menu li {
-  font-weight: 700;
-  line-height: 20px;
-  font-size: 2.5vmin;
-  text-transform: uppercase;
+.nav__toggle,
+.nav__close {
+  flex: 0;
+  color: #fff;
   cursor: pointer;
 }
 
-.header__nav a:hover,
-.header__nav a:focus {
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5rem;
+  padding-right: 10px;
+}
+
+.nav__link {
+  flex: 1;
+  color: #fff;
+  transition: color 0.4s;
+  /* font-size: calc(var(--font_size) - 1vmax); */
+}
+
+.nav__link:hover {
   color: var(--sky-blue);
 }
 
-.header__nav a {
-  text-decoration: none;
-  color: inherit;
-  font-size: inherit;
-  text-transform: uppercase;
-  background-color: var(--primary-color);
-  border-style: none;
+.nav__close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
 }
 
-.header__nav a.active {
-  color: var(--dodger-blue);
+@media (max-width: 1150px) {
+  .nav__menu {
+    /* display: none; */
+    right: -100%;
+    position: fixed;
+    top: 0;
+    /* background-color: hsla(0, 0%, 6%, 0.2); */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    min-width: 200px;
+    width: 50vw;
+    /* height: 50%; */
+    padding: 3rem 3rem;
+    transition: right 0.4s;
+  }
+
+  .show-menu {
+    display: block;
+    right: 0;
+  }
+}
+
+@media (min-width: 1150px) {
+  .nav {
+    /* height: calc(var(--header-height) + 1rem); */
+  }
+  .nav__toggle,
+  .nav__close {
+    display: none;
+  }
+
+  .nav__list {
+    flex-direction: row;
+    column-gap: 2.5rem;
+  }
 }

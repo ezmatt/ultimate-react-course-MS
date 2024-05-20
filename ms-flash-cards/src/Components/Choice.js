@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export function Choice({ correct, selected, onClick, children, clicked }) {
-  console.log("start", clicked, children);
   return (
     <button
       onClick={(e) => onClick(e.target.id)}
